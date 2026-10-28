@@ -9,4 +9,8 @@
   &__titulo {
     font-size: px-a-rem(18);
   }
+    &__portada {
+    height: px-a-rem(260);
+    object-fit: cover;
+  }
 }

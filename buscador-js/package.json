@@ -1,14 +1,15 @@
 {
-  "name": "buscador",
+  "name": "buscador-js",
   "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "Buscador de libros con JavaScript, Bootstrap y Sass",
+  "main": "index.html",
+"scripts": {
+  "build:css": "sass --load-path=node_modules --style=compressed --quiet-deps --silence-deprecation=import scss/main.scss css/estilos.css",
+  "watch:css": "sass --load-path=node_modules --quiet-deps --silence-deprecation=import --watch scss/main.scss css/estilos.css"
+},
   "keywords": [],
-  "author": "",
+  "author": "Andreina Leal",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "bootstrap": "^5.3.8"
   },

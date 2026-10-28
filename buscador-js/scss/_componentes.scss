@@ -1,0 +1,12 @@
+.libro-card {
+  border-left: px-a-rem(6) solid $color-estante;
+  @include transicion((transform, box-shadow));
+
+  &:hover {
+    transform: translateY(px-a-rem(-4));
+  }
+
+  &__titulo {
+    font-size: px-a-rem(18);
+  }
+}

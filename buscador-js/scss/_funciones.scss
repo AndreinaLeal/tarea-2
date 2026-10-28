@@ -1,0 +1,6 @@
+@use "sass:math";
+
+// Convierte px a rem para mantener unidades relativas
+@function px-a-rem($px, $base: 16) {
+  @return math.div($px, $base) * 1rem;
+}

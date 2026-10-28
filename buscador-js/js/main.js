@@ -1,0 +1,1 @@
+console.log("Estantería Común lista");

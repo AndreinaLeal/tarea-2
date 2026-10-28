@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estantería Común | Buscador de libros</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="bg-body-tertiary">
+
+  <!-- Barra de navegación -->
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#buscador">Estantería Común</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#menuPrincipal" aria-controls="menuPrincipal"
+              aria-expanded="false" aria-label="Mostrar menú">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menuPrincipal">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#buscador">Buscador</a></li>
+          <li class="nav-item"><a class="nav-link" href="#lecturas">Mis lecturas</a></li>
+          <li class="nav-item"><a class="nav-link" href="#proponer">Proponer lectura</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+
+    <!-- Búsqueda -->
+    <section id="buscador" class="mb-5">
+      <h1 class="h3 mb-3">Buscador de libros</h1>
+
+      <form id="form-busqueda" class="row g-2 mb-4" novalidate>
+        <div class="col-12 col-sm">
+          <label for="campo-busqueda" class="visually-hidden">Título o autor</label>
+          <input type="search" id="campo-busqueda" name="q" class="form-control"
+                 placeholder="Busca por título o autor" required minlength="2">
+          <div class="invalid-feedback" id="error-busqueda"></div>
+        </div>
+        <div class="col-12 col-sm-auto">
+          <button type="submit" class="btn btn-primary w-100">Buscar</button>
+        </div>
+      </form>
+
+      <!-- Estados de la búsqueda (JS muestra uno a la vez) -->
+      <div id="estado-carga" class="text-center py-5" hidden>
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="mt-2 mb-0">Buscando libros...</p>
+      </div>
+
+      <div id="estado-error" class="alert alert-danger" role="alert" hidden></div>
+
+      <div id="estado-vacio" class="alert alert-info" role="alert" hidden>
+        No se encontraron libros para esa búsqueda. Prueba con otro título o autor.
+      </div>
+
+      <!-- Resultados: las tarjetas las crea JavaScript -->
+      <div id="resultados" class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3"></div>
+    </section>
+
+    <!-- Lista de lecturas -->
+    <section id="lecturas" class="mb-5">
+      <h2 class="h4 mb-3">Mi lista de lecturas</h2>
+
+      <p id="lista-vacia" class="text-body-secondary">
+        Aún no has agregado libros. Busca uno y agrégalo desde su tarjeta.
+      </p>
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead>
+            <tr>
+              <th scope="col">Título</th>
+              <th scope="col">Autores</th>
+              <th scope="col">Estado</th>
+              <th scope="col" class="text-end">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="lista-lecturas"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Formulario de propuesta: se construye en el Paso 7 -->
+    <section id="proponer"></section>
+
+  </main>
+
+  <!-- Modal de detalle del libro -->
+  <div class="modal fade" id="modal-detalle" tabindex="-1"
+       aria-labelledby="modal-titulo" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="modal-titulo"></h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body" id="modal-cuerpo"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="modal-agregar">Agregar a mi lista</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

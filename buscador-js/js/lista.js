@@ -27,3 +27,10 @@ export function siguienteEstado(id) {
 export function quitar(id) {
   lecturas = lecturas.filter((libro) => libro.id !== id);
 }
+// Cuenta cuántos libros hay en cada estado: { Pendiente: 0, Leyendo: 0, Leído: 0 }
+export function contarPorEstado() {
+  return ESTADOS.reduce((conteo, estado) => {
+    conteo[estado] = lecturas.filter((libro) => libro.estado === estado).length;
+    return conteo;
+  }, {});
+}

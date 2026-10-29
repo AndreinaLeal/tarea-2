@@ -1,5 +1,6 @@
 .libro-card {
   border-left: px-a-rem(6) solid $color-estante;
+  cursor: pointer;
   @include transicion((transform, box-shadow));
 
   &:hover {
@@ -9,8 +10,76 @@
   &__titulo {
     font-size: px-a-rem(18);
   }
-    &__portada {
+
+  &__portada {
     height: px-a-rem(260);
     object-fit: cover;
+  }
+}
+
+// --- Filas de la lista de lecturas: JS agrega/quita estas clases ---
+.fila-lectura {
+  @include transicion((opacity, background-color));
+
+  &--entrando,
+  &--saliendo {
+    opacity: 0;
+  }
+
+  &--cambio {
+    animation: destello-estado 0.6s ease-out;
+  }
+}
+
+@keyframes destello-estado {
+  from { background-color: rgba(var(--bs-primary-rgb), 0.25); }
+  to   { background-color: transparent; }
+}
+// --- Componente propio: resumen de lecturas (mobile-first) ---
+// Variables CSS: se declaran en el componente y se redefinen por modificador
+.resumen {
+  --resumen-espacio: 0.5rem;
+  --resumen-relleno: 0.75rem;
+  --resumen-tamano-numero: 1.5rem;
+  --resumen-color: #{$secondary};
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--resumen-espacio);
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--resumen-relleno);
+    background-color: var(--bs-body-bg);
+    border-top: 0.25rem solid var(--resumen-color);
+    border-radius: $border-radius;
+
+    &--pendiente { --resumen-color: #{$secondary}; }
+    &--leyendo   { --resumen-color: #{$warning}; }
+    &--leido     { --resumen-color: #{$success}; }
+  }
+
+  &__numero {
+    font-size: var(--resumen-tamano-numero);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  &__etiqueta {
+    font-size: 0.8125rem;
+    color: var(--bs-secondary-color);
+  }
+
+  // Desde 576px (sm) el panel respira más
+  @include media-breakpoint-up(sm) {
+    --resumen-espacio: 1rem;
+    --resumen-relleno: 1.25rem;
+    --resumen-tamano-numero: 2.25rem;
+
+    &__etiqueta {
+      font-size: 0.9375rem;
+    }
   }
 }

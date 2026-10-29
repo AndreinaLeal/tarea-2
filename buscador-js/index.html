@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Estantería Común | Buscador de libros</title>
+    <link rel="icon" href="data:,">
   <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body class="bg-body-tertiary">
@@ -66,7 +67,22 @@
     <!-- Lista de lecturas -->
     <section id="lecturas" class="mb-5">
       <h2 class="h4 mb-3">Mi lista de lecturas</h2>
-
+         <div id="aviso-lista" class="alert alert-warning" role="alert" hidden></div>
+      <!-- Componente propio: resumen de lecturas (Grid + variables CSS) -->
+      <div id="resumen-lecturas" class="resumen mb-3" role="group" aria-label="Resumen de lecturas por estado">
+        <div class="resumen__item resumen__item--pendiente">
+          <span class="resumen__numero" data-estado="Pendiente">0</span>
+          <span class="resumen__etiqueta">Pendientes</span>
+        </div>
+        <div class="resumen__item resumen__item--leyendo">
+          <span class="resumen__numero" data-estado="Leyendo">0</span>
+          <span class="resumen__etiqueta">Leyendo</span>
+        </div>
+        <div class="resumen__item resumen__item--leido">
+          <span class="resumen__numero" data-estado="Leído">0</span>
+          <span class="resumen__etiqueta">Leídos</span>
+        </div>
+      </div>
       <p id="lista-vacia" class="text-body-secondary">
         Aún no has agregado libros. Busca uno y agrégalo desde su tarjeta.
       </p>
@@ -86,8 +102,96 @@
       </div>
     </section>
 
-    <!-- Formulario de propuesta: se construye en el Paso 7 -->
-    <section id="proponer"></section>
+      <!-- Formulario de propuesta de lectura -->
+    <section id="proponer" class="mb-5">
+      <h2 class="h4 mb-3">Proponer una lectura para la próxima sesión</h2>
+
+      <div id="alerta-formulario" class="alert" role="alert" hidden></div>
+
+      <form id="form-propuesta" class="row g-3" novalidate>
+
+        <div class="col-12">
+          <label for="titulo" class="form-label">Título</label>
+          <input type="text" id="titulo" name="titulo" class="form-control"
+                 required minlength="2" maxlength="150">
+          <div class="invalid-feedback"></div>
+        </div>
+
+        <fieldset class="col-12">
+          <legend class="form-label fs-6">Autores (de 1 a 5)</legend>
+          <div id="autores" class="d-grid gap-2"></div>
+          <button type="button" id="agregar-autor" class="btn btn-outline-primary btn-sm mt-2">
+            Agregar autor
+          </button>
+        </fieldset>
+
+        <div class="col-6 col-md-3">
+          <label for="anio" class="form-label">Año de publicación</label>
+          <input type="number" id="anio" name="anio" class="form-control"
+                 required min="1000" step="1" inputmode="numeric">
+          <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="col-6 col-md-3">
+          <label for="paginas" class="form-label">Cantidad de páginas</label>
+          <input type="number" id="paginas" name="paginas" class="form-control"
+                 required min="1" max="5000" step="1" inputmode="numeric">
+          <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label for="genero" class="form-label">Género</label>
+          <select id="genero" name="genero" class="form-select" required>
+            <option value="" selected disabled>Selecciona un género</option>
+            <option>Novela</option>
+            <option>Cuento</option>
+            <option>Poesía</option>
+            <option>Ensayo</option>
+            <option>Ciencia ficción</option>
+            <option>Fantasía</option>
+            <option>Historia</option>
+            <option>Biografía</option>
+            <option>Otro</option>
+          </select>
+          <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label for="correo" class="form-label">Correo de quien propone</label>
+          <input type="email" id="correo" name="correo" class="form-control"
+                 required maxlength="120" autocomplete="email">
+          <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label for="fecha" class="form-label">Fecha propuesta para la sesión</label>
+          <input type="date" id="fecha" name="fecha" class="form-control" required>
+          <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="col-12">
+          <label for="motivo" class="form-label">Motivo de la propuesta</label>
+          <textarea id="motivo" name="motivo" class="form-control" rows="4"
+                    required minlength="20" maxlength="500"></textarea>
+          <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="col-12">
+          <button type="submit" id="boton-enviar" class="btn btn-primary">Enviar propuesta</button>
+        </div>
+      </form>
+
+      <!-- Plantilla de un campo de autor: se clona cada vez que se agrega uno -->
+      <template id="plantilla-autor">
+        <div class="input-group has-validation autor-fila">
+          <input type="text" name="autor" class="form-control" placeholder="Nombre del autor"
+                 aria-label="Autor" required minlength="2" maxlength="80"
+                 pattern="[A-Za-zÁÉÍÓÚÜÑáéíóúüñ .'\-]+">
+          <button type="button" class="btn btn-outline-danger" data-accion="quitar-autor">Quitar</button>
+          <div class="invalid-feedback"></div>
+        </div>
+      </template>
+    </section>
 
   </main>
 

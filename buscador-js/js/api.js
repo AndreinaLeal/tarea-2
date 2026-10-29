@@ -33,3 +33,30 @@ export async function buscarLibros(texto, limite = 12) {
   const datos = await respuesta.json();
   return datos.docs.map(normalizarLibro);
 }
+const URL_PROPUESTAS = "https://jsonplaceholder.typicode.com/posts";
+
+// Envía la propuesta al servicio de pruebas (simula el registro)
+export async function enviarPropuesta(propuesta) {
+  let respuesta;
+
+  try {
+    respuesta = await fetch(URL_PROPUESTAS, {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=UTF-8" },
+      body: JSON.stringify({
+        title: propuesta.titulo,
+        body: propuesta.motivo,
+        userId: 1,
+        ...propuesta,
+      }),
+    });
+  } catch (error) {
+    throw new Error("No se pudo conectar con el servicio de registro. Revisa tu conexión a internet.");
+  }
+
+  if (!respuesta.ok) {
+    throw new Error(`El servicio rechazó la propuesta (código ${respuesta.status}).`);
+  }
+
+  return respuesta.json(); // el servicio devuelve lo enviado más un id simulado
+}

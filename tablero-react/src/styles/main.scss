@@ -1,0 +1,8 @@
+// 1. Variables de origen de Bootstrap (van ANTES de importarlo)
+@import "variables";
+
+// 2. Bootstrap
+@import "bootstrap/scss/bootstrap";
+
+// 3. Estilos propios
+@import "componentes";

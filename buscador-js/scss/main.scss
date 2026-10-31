@@ -1,8 +1,41 @@
 // 1. Variables de origen de Bootstrap (van ANTES de importarlo)
 @import "variables";
 
-// 2. Bootstrap completo
-@import "bootstrap/scss/bootstrap";
+// 2. Bootstrap: solo los parciales que usa la app
+// Configuración (obligatoria y en este orden)
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+// Base y maquetación
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+
+// Componentes que sí se usan: tabla, formulario, botones, navbar,
+// tarjetas, insignias, alertas, modal y spinner
+@import "bootstrap/scss/tables";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/card";
+@import "bootstrap/scss/badge";
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/close";
+@import "bootstrap/scss/modal";
+@import "bootstrap/scss/spinners";
+
+// Helpers y utilidades (siempre al final de Bootstrap)
+@import "bootstrap/scss/helpers";
+@import "bootstrap/scss/utilities/api";
 
 // 3. Estilos propios
 @import "funciones";

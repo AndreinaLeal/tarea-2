@@ -30,8 +30,8 @@ Este error se produce cuando el navegador enlaza los módulos ES, antes de ejecu
 
 Para comprobar que la función que el navegador no encontraba ya funciona, se puso un punto de interrupción en `actualizarFila` (`js/render.js`, línea `const fila = buscarFila(libro.id);`). Al pulsar "Cambiar estado" en un libro de la lista, la ejecución se pausó y en **Scope → Local** se observó:
 
-- `libro.id`: [...]
-- `libro.estado`: [...]
+- `libro.id`: `/works/OL27448W` (The Lord of the Rings)
+- `libro.estado`: `Leyendo`, que ya es el estado nuevo, porque `lista.siguienteEstado` lo cambia antes de llamar a `actualizarFila`
 
 Con "paso a paso" (F10) se vio cómo `crearInsignia` reemplaza solo la insignia de esa fila, sin reconstruir la tabla.
 
